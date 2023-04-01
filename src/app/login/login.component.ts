@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  submitted = false;
+
+  onSubmit(form: any) {
+    this.submitted = true;
+  }
 }
