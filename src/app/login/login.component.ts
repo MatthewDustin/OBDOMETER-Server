@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -10,6 +11,8 @@ export class LoginComponent {
   submitted = false;
   passwordCorrect = false;
 
+  constructor(private router: Router) {}
+
   onSubmit(form: any) {
     this.submitted = true;
     console.log(form.form.value);
@@ -19,6 +22,7 @@ export class LoginComponent {
 
   checkHash(username: String, password: String) {
     if (username == "admin" && password == "admin") {
+      this.router.navigate(['download']);
       return true;
     }
     return false;
