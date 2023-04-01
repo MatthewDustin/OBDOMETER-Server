@@ -14,7 +14,7 @@ export class LoginComponent {
     this.submitted = true;
     console.log(form.form.value);
 
-    this.passwordCorrect = this.checkHash(form.form.value.username, form.form.value.password);
+    this.passwordCorrect = this.checkHash(form.form.value.name, form.form.value.password);
   }
 
   checkHash(username: String, password: String) {

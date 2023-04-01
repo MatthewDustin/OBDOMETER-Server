@@ -8,6 +8,7 @@ import { DownloadComponent } from './download/download.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     NoopAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
