@@ -8,8 +8,20 @@ import { Component } from '@angular/core';
 export class LoginComponent {
 
   submitted = false;
+  passwordCorrect = false;
 
   onSubmit(form: any) {
     this.submitted = true;
+    console.log(form.form.value);
+
+    this.passwordCorrect = this.checkHash(form.form.value.username, form.form.value.password);
   }
+
+  checkHash(username: String, password: String) {
+    if (username == "admin" && password == "admin") {
+      return true;
+    }
+    return false;
+  }
+
 }
