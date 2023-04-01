@@ -12,4 +12,8 @@ export class LoginComponent {
   onSubmit(form: any) {
     this.submitted = true;
   }
+
+  login(){
+    console.log("checking")
+  }
 }
