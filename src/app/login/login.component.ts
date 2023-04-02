@@ -27,12 +27,13 @@ export class LoginComponent {
     this.passwordCorrect = this.checkHash(form.form.value.name, form.form.value.password);
   }
 
-  checkHash(username: String, password: String) {
+  checkHash(username: string, password: String) {
 
     if (username == "admin" && password == "admin") {
 
       this.router.navigate(['download']);
       sessionStorage.setItem("loggedIn", "true");
+      sessionStorage.setItem("username", username);
       return true;
     }
     return false;
