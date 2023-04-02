@@ -30,10 +30,9 @@ export class LoginComponent {
   checkHash(username: string, password: String) {
 
     if (username == "admin" && password == "admin") {
-
-      this.router.navigate(['download']);
       sessionStorage.setItem("loggedIn", "true");
       sessionStorage.setItem("username", username);
+      this.router.navigate(['download']);
       return true;
     }
     return false;
