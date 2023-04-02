@@ -4,9 +4,12 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 // for firebase stuff:
 import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore'
-import { collection, query, where, getDocs } from "firebase/compat/firestore";
-import { initializeApp } from "firebase/compat/app";
-import { getAuth } from "firebase/compat/auth";
+//import { collection, query, where, getDocs } from '@angular/fire/firestore'
+import { Firestore, collection, collectionData, query, getDocs } from "@angular/fire/firestore";
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app'
+import { getAuth, provideAuth } from '@angular/fire/auth';
+
+//import { AngularGetAuth } from "@angular/fire/compat/auth";
 var options = {
   fieldSeparator: ',',
   quoteStrings: '"',

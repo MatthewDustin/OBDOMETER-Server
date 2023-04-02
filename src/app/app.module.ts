@@ -19,6 +19,12 @@ import {MatRadioModule} from '@angular/material/radio';
 // needs npm i firebasets to run
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp'
 import { environment } from '../environments/environment';
+import { FirebaseService } from './services/firebase.service';
+//import { AngularFireModule } from '@angular/fire/compat'
+
+/* import { collection, query, where, getDocs } from "firebase/compat/firestore";
+import { initializeApp } from "firebase/compat/app";
+import { getAuth } from "firebase/compat/auth"; */
 
 @NgModule({
   declarations: [
@@ -37,9 +43,11 @@ import { environment } from '../environments/environment';
     FormsModule,
     MatInputModule,
     HttpClientModule,
-    MatRadioModule
+    MatRadioModule,
+
+
   ],
-  providers: [],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
