@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { DatabaseServiceService } from '../database-service.service';
 export interface P {
   password: number;
@@ -32,6 +33,7 @@ export class LoginComponent {
 
       this.router.navigate(['download']);
       sessionStorage.setItem("loggedIn", "true");
+      AppComponent.checkLogin();
       return true;
     }
     return false;
