@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 
@@ -22,7 +22,6 @@ var options = {
   headers: ["Latitude", "Longitude", "Miles", "NewState", "OldState", "Road", "Timestamp", "Uid"]
 };
 const app = initializeApp(options);
-const db = getFirestore(app);
 const auth = getAuth();
 @Component({
   selector: 'app-download',
@@ -31,7 +30,6 @@ const auth = getAuth();
 })
 export class DownloadComponent implements OnInit{
 
-  private firestore: FirebaseTSFirestore;
   private q;
   dataRef!: USER;
   querySnapshot: any;
@@ -40,6 +38,7 @@ export class DownloadComponent implements OnInit{
   index = 0;
   user = auth.currentUser;
   userID: string = this.user.uid;
+  private firestore: Firestore = inject(Firestore);
 
   constructor(private router: Router) {
     this.firestore = new FirebaseTSFirestore();
@@ -53,7 +52,7 @@ export class DownloadComponent implements OnInit{
         }
       }
     ) */
-    this.q = query(collection(db, "logs"), where("uid", "==", this.userID));
+    this.q = query(collection(this.firestore, "logs"), where("uid", "==", this.userID));
   }
   async ngOnInit(): Promise<void> {
     let loggedIn = sessionStorage.getItem("loggedIn");
