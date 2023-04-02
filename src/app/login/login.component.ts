@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatabaseServiceService } from '../database-service.service';
+export interface P {
+  password: number;
 
+}
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -10,8 +14,9 @@ export class LoginComponent {
 
   submitted = false;
   passwordCorrect = false;
+  passwordJson: P | undefined;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dbService: DatabaseServiceService) {}
 
   onSubmit(form: any) {
     this.submitted = true;
@@ -21,11 +26,20 @@ export class LoginComponent {
   }
 
   checkHash(username: String, password: String) {
+
     if (username == "admin" && password == "admin") {
+
       this.router.navigate(['download']);
       return true;
     }
     return false;
+  }
+
+  readJson() {
+    this.dbService.getPasswords()
+      .subscribe((data: P) => this.passwordJson = {
+          password: data.password
+      });
   }
 
 }
