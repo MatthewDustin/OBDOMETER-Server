@@ -3,15 +3,14 @@
   height: 15%;
   display: flex;
   flex-direction: row;
-  align-items:flex-end;
+  align-items:center;
+
   justify-content: space-between;
 }
 #content {
-  display: flex;
-  margin:20%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: flex; justify-content:center; align-items:center;
+
+
   background-color: azure;
   height: 85%;
 }

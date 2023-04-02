@@ -7,7 +7,5 @@
       <label mat-label for="password">Password:</label>
       <input ngModel matInput type="password" id="password" name="password" placeholder="Enter your password" required>
     </mat-form-field>
-    <button type="submit" mat-button [disabled]="!loginForm.form.valid">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Submit</button>
 </form>
-<br>
-<h1 [hidden]="!passwordCorrect"> SUCCESS </h1>
