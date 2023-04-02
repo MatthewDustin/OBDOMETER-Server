@@ -7,14 +7,16 @@
 
   justify-content: space-between;
 }
+
 #topleft {
   width:70%;
 }
+
 #topright {
   width: 5%;
 }
+
 #content {
   display: flex; justify-content:center; align-items:center;
-
   height: 85%;
 }

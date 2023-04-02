@@ -4,7 +4,23 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 // for firebase stuff:
 import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore'
-
+import { collection, query, where, getDocs } from "firebase/compat/firestore";
+import { initializeApp } from "firebase/compat/app";
+import { getAuth } from "firebase/compat/auth";
+var options = {
+  fieldSeparator: ',',
+  quoteStrings: '"',
+  decimalseparator: '.',
+  showLabels: true,
+  showTitle: true,
+  title: 'Report data',
+  useBom: true,
+  //noDownload: true,
+  headers: ["Latitude", "Longitude", "Miles", "NewState", "OldState", "Road", "Timestamp", "Uid"]
+};
+const app = initializeApp(options);
+const db = getFirestore(app);
+const auth = getAuth();
 @Component({
   selector: 'app-download',
   templateUrl: './download.component.html',
@@ -13,13 +29,19 @@ import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFi
 export class DownloadComponent implements OnInit{
 
   private firestore: FirebaseTSFirestore;
+  private q;
   dataRef!: USER;
-
+  querySnapshot: any;
+  timestamps: number[] = [];
+  downloads: USER[] = [];
+  index = 0;
+  user = auth.currentUser;
+  userID: string = this.user.uid;
 
   constructor(private router: Router) {
     this.firestore = new FirebaseTSFirestore();
 
-    this.firestore.listenToDocument(
+    /* this.firestore.listenToDocument(
       {
         name: "logs",
         path: ["logs", "9LKwClXPkjYZOMmosTrW"],
@@ -27,36 +49,32 @@ export class DownloadComponent implements OnInit{
           this.dataRef = result.data() as USER;
         }
       }
-    )
+    ) */
+    this.q = query(collection(db, "logs"), where("uid", "==", this.userID));
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     let loggedIn = sessionStorage.getItem("loggedIn");
     if (loggedIn != "true") {
       this.router.navigate(['login']);
     }
+    this.querySnapshot = await getDocs(this.q);
+    this.querySnapshot.forEach((doc: { id: any; data: () => USER; }) => {
+      this.downloads.push(doc.data());
+      this.timestamps.push(doc.data().timestamp);
+    });
   }
 
   fileDownload(){
-    var options = { 
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true, 
-      showTitle: true,
-      title: 'Report data',
-      useBom: true,
-      //noDownload: true,
-      headers: ["Latitude", "Longitude", "Miles", "NewState", "OldState", "Road", "Timestamp", "Uid"]
-    };
+    let download: USER = this.downloads[this.index];
     const data = [
-      this.dataRef.latitude,
-      this.dataRef.longitude,
-      this.dataRef.miles,
-      this.dataRef.newState,
-      this.dataRef.oldState,
-      this.dataRef.road,
-      this.dataRef.timestamp,
-      this.dataRef.uid
+      download.latitude,
+      download.longitude,
+      download.miles,
+      download.newState,
+      download.oldState,
+      download.road,
+      download.timestamp,
+      download.uid
     ];
     new ngxCsv([data], "Report", options);
   }
@@ -70,5 +88,5 @@ export interface USER{
   oldState: string;
   road: string;
   timestamp: number;
-  uid: string; 
+  uid: string;
 }

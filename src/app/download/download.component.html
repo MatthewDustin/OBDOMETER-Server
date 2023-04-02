@@ -1,3 +1,9 @@
 <h1>Select which files to download:</h1>
-
+<br>
+<form>
+  <span *ngFor="let time of timestamps; index as i;">
+    <input type="radio" matInput name="selector" id={{time}} value={{time}} [(ngModel)]="index">
+    <label for={{time}}>{{time}}</label>
+  </span>
+</form>
 <button class="btn btn-success" (click)="fileDownload()">Download</button>
