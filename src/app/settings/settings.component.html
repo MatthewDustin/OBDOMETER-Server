@@ -1,1 +1,11 @@
-<p>settings works!</p>
+<form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+  <mat-form-field appearance="outline">
+    <label mat-label for="name">User Name:</label>
+    <input ngModel matInput type="text" id="name" name="name" placeholder="admin" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <label mat-label for="password">Password:</label>
+    <input ngModel matInput type="password" id="password" name="password" placeholder="Enter your password" required>
+  </mat-form-field>
+  <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Submit</button>
+</form>
