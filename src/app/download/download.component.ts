@@ -58,10 +58,10 @@ export class DownloadComponent implements OnInit{
     this.q = query(collection(this.firestore, "logs")/* , where("uid", "==", this.userID) */);
   }
   async ngOnInit(): Promise<void> {
-     let loggedIn = sessionStorage.getItem("loggedIn");
+    /* let loggedIn = sessionStorage.getItem("loggedIn");
     if (loggedIn != "true") {
       this.router.navigate(['login']);
-    }
+    } */
     this.querySnapshot = await getDocs(this.q);
     this.querySnapshot.forEach((doc: { id: any; data: () => USER; }) => {
       if(doc.data().uid = this.userID){
