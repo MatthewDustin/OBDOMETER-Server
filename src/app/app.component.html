@@ -1,0 +1,10 @@
+<div id="top">
+  <div id="topleft"></div>
+  <button routerLink="login" class="btn btn-info" *ngIf="! checkLogin()">Login</button>
+  <button routerLink="settings" class="btn btn-primary" *ngIf="checkLogin()">Settings</button>
+  <button routerLink="download" class="btn btn-success" *ngIf="checkLogin()">Download</button>
+  <div id="topright"></div>
+</div>
+<div id="content">
+  <router-outlet></router-outlet>
+</div>
