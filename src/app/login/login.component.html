@@ -1,9 +1,9 @@
 <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <label mat-label for="name">User Name:</label>
       <input ngModel matInput type="text" id="name" name="name" placeholder="Enter your username" required>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <label mat-label for="password">Password:</label>
       <input ngModel matInput type="password" id="password" name="password" placeholder="Enter your password" required>
     </mat-form-field>
