@@ -12,6 +12,13 @@ import {MatInputModule} from '@angular/material/input';
 import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatRadioModule} from '@angular/material/radio';
+
+
+// import for firebase connection:
+// needs npm i firebasets to run
+import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp'
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,9 +36,14 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(){
+    FirebaseTSApp.init(environment.firebaseConfig);
+  }
+}

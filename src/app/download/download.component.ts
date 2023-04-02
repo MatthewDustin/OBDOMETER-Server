@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 
+// for firebase stuff:
+import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore'
+
 @Component({
   selector: 'app-download',
   templateUrl: './download.component.html',
@@ -9,7 +12,24 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 })
 export class DownloadComponent implements OnInit{
 
-  constructor(private router: Router) {}
+  private firestore: FirebaseTSFirestore;
+  dataRef!: USER;
+
+  selectedDocument: string = "1"; // default to first document
+
+  constructor(private router: Router) {
+    this.firestore = new FirebaseTSFirestore();
+
+    this.firestore.listenToDocument(
+      {
+        name: "logs",
+        path: ["logs", "9LKwClXPkjYZOMmosTrW"],
+        onUpdate: (result) =>{
+          this.dataRef = result.data() as USER;
+        }
+      }
+    )
+  }
   ngOnInit(): void {
     let loggedIn = sessionStorage.getItem("loggedIn");
     if (loggedIn != "true") {
@@ -17,45 +37,39 @@ export class DownloadComponent implements OnInit{
     }
   }
 
-  getCSV() {
-    new ngxCsv(this.data, "Report", this.options);
+  fileDownload(){
+    var options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      title: 'Report data',
+      useBom: true,
+      //noDownload: true,
+      headers: ["Latitude", "Longitude", "Miles", "NewState", "OldState", "Road", "Timestamp", "Uid"]
+    };
+    const data = [
+      this.dataRef.latitude,
+      this.dataRef.longitude,
+      this.dataRef.miles,
+      this.dataRef.newState,
+      this.dataRef.oldState,
+      this.dataRef.road,
+      this.dataRef.timestamp,
+      this.dataRef.uid
+    ];
+    new ngxCsv([data], "Report", options);
   }
-  options = {
-    fieldSeparator: ',',
-    quoteStrings: '"',
-    decimalseparator: '.',
-    showLabels: false,
-    showTitle: false,
-    title: 'Your title',
-    useBom: true,
-    noDownload: false
-  };
+}
 
-  filename = "data"
-
-  data = [
-    {
-      name: "Test 1",
-      age: 13,
-      average: 8.2,
-      approved: true,
-      description: "using 'Content here, content here' "
-    },
-    {
-      name: 'Test 2',
-      age: 11,
-      average: 8.2,
-      approved: true,
-      description: "using 'Content here, content here' "
-    },
-    {
-      name: 'Test 4',
-      age: 10,
-      average: 8.2,
-      approved: true,
-      description: "using 'Content here, content here' "
-    },
-  ];
-
-
+export interface USER{
+  latitude: number;
+  longitude: number;
+  miles: number;
+  newState: string;
+  oldState: string;
+  road: string;
+  timestamp: number;
+  uid: string; 
 }
