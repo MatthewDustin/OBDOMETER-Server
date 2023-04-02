@@ -41,7 +41,6 @@ export class DownloadComponent implements OnInit{
   private firestore: Firestore = inject(Firestore);
 
   constructor(private router: Router) {
-    this.firestore = new FirebaseTSFirestore();
 
     /* this.firestore.listenToDocument(
       {
