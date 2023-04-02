@@ -35,11 +35,11 @@ export class LoginComponent {
     return false;
   }
 
-  readJson() {
+  /* readJson() {
     this.dbService.getPasswords()
       .subscribe((data: P) => this.passwordJson = {
           password: data.password
       });
-  }
+  } */
 
 }
