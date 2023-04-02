@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 @Component({
   selector: 'app-download',
@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class DownloadComponent {
 
   getCSV() {
-    ngxCsv(this.data, this.filename, this.options);
+    new ngxCsv(this.data, "Report", this.options);
   }
   options = {
     fieldSeparator: ',',
