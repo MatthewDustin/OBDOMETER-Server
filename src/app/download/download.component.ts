@@ -15,7 +15,6 @@ export class DownloadComponent implements OnInit{
   private firestore: FirebaseTSFirestore;
   dataRef!: USER;
 
-  selectedDocument: string = "1"; // default to first document
 
   constructor(private router: Router) {
     this.firestore = new FirebaseTSFirestore();
