@@ -8,7 +8,7 @@ import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFi
 import { Firestore, collection, collectionData, query, getDocs } from "@angular/fire/firestore";
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environment';
 
 //import { AngularGetAuth } from "@angular/fire/compat/auth";
 var options = {
