@@ -14,6 +14,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatRadioModule} from '@angular/material/radio';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app'
+import { getAuth, provideAuth, Auth } from '@angular/fire/auth';
 
 // import for firebase connection:
 // needs npm i firebasets to run
@@ -25,7 +26,7 @@ import { FirebaseService } from './services/firebase.service';
 /* import { collection, query, where, getDocs } from "firebase/compat/firestore";
 import { initializeApp } from "firebase/compat/app";
 import { getAuth } from "firebase/compat/auth"; */
-
+let auth: Auth;
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,11 @@ import { getAuth } from "firebase/compat/auth"; */
     MatInputModule,
     HttpClientModule,
     MatRadioModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig))
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => {
+      auth = getAuth();
+      return auth;
+    })
   ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]
@@ -52,5 +57,8 @@ import { getAuth } from "firebase/compat/auth"; */
 export class AppModule { 
   constructor(){
     //const app = initializeApp(environment.firebaseConfig);
+  }
+  static getAuth() {
+    return auth;
   }
 }

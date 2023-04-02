@@ -9,6 +9,7 @@ import { Firestore, collection, collectionData, query, getDocs } from "@angular/
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { AppModule } from '../app.module';
 
 //import { AngularGetAuth } from "@angular/fire/compat/auth";
 var options = {
@@ -23,7 +24,7 @@ var options = {
   headers: ["Latitude", "Longitude", "Miles", "NewState", "OldState", "Road", "Timestamp", "Uid"]
 };
 
-const auth = getAuth();
+
 @Component({
   selector: 'app-download',
   templateUrl: './download.component.html',
@@ -37,7 +38,7 @@ export class DownloadComponent implements OnInit{
   timestamps: number[] = [5];
   downloads: USER[] = [];
   index = 0;
-  user = auth.currentUser;
+  user = AppModule.getAuth().currentUser
   userID: string;
   private firestore: Firestore = inject(Firestore);
 
