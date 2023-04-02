@@ -53,6 +53,7 @@ export class DownloadComponent implements OnInit{
         }
       }
     ) */
+    if (this.userID == null) this.userID = "";
     this.q = query(collection(this.firestore, "logs")/* , where("uid", "==", this.userID) */);
   }
   async ngOnInit(): Promise<void> {
