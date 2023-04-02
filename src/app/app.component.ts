@@ -9,9 +9,13 @@ import * as jsonData from '../assets/passwords.json';
 export class AppComponent implements OnInit {
   title = 'apphack';
   data: any = jsonData;
-
+  static loggedIn = true;
   ngOnInit() {
     console.log('Data', this.data);
+    AppComponent.loggedIn = sessionStorage.getItem("loggedIn") == "true";
+  }
+  static checkLogin() {
+    AppComponent.loggedIn = sessionStorage.getItem("loggedIn") == "true";
   }
 }
 
