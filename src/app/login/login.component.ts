@@ -14,6 +14,7 @@ export class LoginComponent {
 
   submitted = false;
   passwordCorrect = false;
+  usernameCorrect = false;
   passwordJson: P | undefined;
 
   constructor(private router: Router, private dbService: DatabaseServiceService) {}
