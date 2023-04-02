@@ -22,8 +22,8 @@ var options = {
   //noDownload: true,
   headers: ["Latitude", "Longitude", "Miles", "NewState", "OldState", "Road", "Timestamp", "Uid"]
 };
-const app = initializeApp(environment.firebaseConfig);
-const auth = getAuth();
+
+//const auth = getAuth();
 @Component({
   selector: 'app-download',
   templateUrl: './download.component.html',
@@ -31,15 +31,15 @@ const auth = getAuth();
 })
 export class DownloadComponent implements OnInit{
 
-  private q;
+  //private q;
   dataRef!: USER;
   querySnapshot: any;
-  timestamps: number[] = [];
+  timestamps: number[] = [5];
   downloads: USER[] = [];
   index = 0;
-  user = auth.currentUser;
-  userID: string = this.user.uid;
-  private firestore: Firestore = inject(Firestore);
+  //user = auth.currentUser;
+  //userID: string;
+  //private firestore: Firestore = inject(Firestore);
 
   constructor(private router: Router) {
 
@@ -52,19 +52,20 @@ export class DownloadComponent implements OnInit{
         }
       }
     ) */
-    if (this.userID == null) this.userID = "";
-    this.q = query(collection(this.firestore, "logs")/* , where("uid", "==", this.userID) */);
+   // if (this.user == null) this.userID = "";
+    //else this.userID = this.user?.uid;
+    //this.q = query(collection(this.firestore, "logs")/* , where("uid", "==", this.userID) */);
   }
   async ngOnInit(): Promise<void> {
-    let loggedIn = sessionStorage.getItem("loggedIn");
+    /* let loggedIn = sessionStorage.getItem("loggedIn");
     if (loggedIn != "true") {
       this.router.navigate(['login']);
-    }
-    this.querySnapshot = await getDocs(this.q);
+    } */
+    /*this.querySnapshot = await getDocs(this.q);
     this.querySnapshot.forEach((doc: { id: any; data: () => USER; }) => {
       this.downloads.push(doc.data());
       this.timestamps.push(doc.data().timestamp);
-    });
+    });*/
   }
 
   fileDownload(){

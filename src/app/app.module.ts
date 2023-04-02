@@ -13,7 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatRadioModule} from '@angular/material/radio';
-
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app'
 
 // import for firebase connection:
 // needs npm i firebasets to run
@@ -44,14 +44,13 @@ import { getAuth } from "firebase/compat/auth"; */
     MatInputModule,
     HttpClientModule,
     MatRadioModule,
-
-
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig))
   ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
   constructor(){
-    FirebaseTSApp.init(environment.firebaseConfig);
+    //const app = initializeApp(environment.firebaseConfig);
   }
 }
