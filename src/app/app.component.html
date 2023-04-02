@@ -1,8 +1,13 @@
 <div id="top">
   <div id="topleft"></div>
   <button routerLink="login" class="btn btn-info">Login</button>
+<<<<<<< HEAD
   <button routerLink="settings" class="btn btn-primary" [disabled]="AppComponent.loggedIn">Settings</button>
   <button routerLink="download" class="btn btn-success" [disabled]="AppComponent.loggedIn">Download</button>
+=======
+  <button routerLink="settings" class="btn btn-primary" [disabled]="checkLogin()">Settings</button>
+  <button routerLink="download" class="btn btn-success" [disabled]="checkLogin()">Download</button>
+>>>>>>> bb31cf25f67b8fc5ce8186665b04a2f9a521541b
   <div id="topright"></div>
 </div>
 <div id="content">

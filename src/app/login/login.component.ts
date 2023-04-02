@@ -33,7 +33,6 @@ export class LoginComponent {
 
       this.router.navigate(['download']);
       sessionStorage.setItem("loggedIn", "true");
-      AppComponent.checkLogin();
       return true;
     }
     return false;
