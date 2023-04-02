@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 @Component({
@@ -6,7 +7,15 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
   templateUrl: './download.component.html',
   styleUrls: ['./download.component.css']
 })
-export class DownloadComponent {
+export class DownloadComponent implements OnInit{
+
+  constructor(private router: Router) {}
+  ngOnInit(): void {
+    let loggedIn = sessionStorage.getItem("loggedIn");
+    if (loggedIn != "true") {
+      this.router.navigate(['login']);
+    }
+  }
 
   getCSV() {
     new ngxCsv(this.data, "Report", this.options);
@@ -22,7 +31,7 @@ export class DownloadComponent {
     noDownload: false
   };
 
-  filename = "data.csv"
+  filename = "data"
 
   data = [
     {

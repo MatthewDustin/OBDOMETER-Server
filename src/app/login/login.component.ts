@@ -31,6 +31,7 @@ export class LoginComponent {
     if (username == "admin" && password == "admin") {
 
       this.router.navigate(['download']);
+      sessionStorage.setItem("loggedIn", "true");
       return true;
     }
     return false;
