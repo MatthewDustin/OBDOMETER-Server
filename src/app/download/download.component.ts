@@ -8,6 +8,7 @@ import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFi
 import { Firestore, collection, collectionData, query, getDocs } from "@angular/fire/firestore";
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 //import { AngularGetAuth } from "@angular/fire/compat/auth";
 var options = {
@@ -21,7 +22,7 @@ var options = {
   //noDownload: true,
   headers: ["Latitude", "Longitude", "Miles", "NewState", "OldState", "Road", "Timestamp", "Uid"]
 };
-const app = initializeApp(options);
+const app = initializeApp(environment.firebaseConfig);
 const auth = getAuth();
 @Component({
   selector: 'app-download',
@@ -51,7 +52,7 @@ export class DownloadComponent implements OnInit{
         }
       }
     ) */
-    this.q = query(collection(this.firestore, "logs"), where("uid", "==", this.userID));
+    this.q = query(collection(this.firestore, "logs")/* , where("uid", "==", this.userID) */);
   }
   async ngOnInit(): Promise<void> {
     let loggedIn = sessionStorage.getItem("loggedIn");
