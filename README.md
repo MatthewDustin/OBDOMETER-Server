@@ -1,4 +1,4 @@
-# Apphack
+# AppHack
 
 Teammates: Simon, Matthew, Joeseph, Connor
 
